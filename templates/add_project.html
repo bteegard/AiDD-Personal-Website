@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Project - Bryant Teegardin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="{{ url_for('index') }}" class="logo">Bryant Teegardin</a>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About Me</a></li>
+                <li><a href="{{ url_for('resume') }}">Resume</a></li>
+                <li><a href="{{ url_for('projects') }}">Projects</a></li>
+                <li><a href="{{ url_for('add_project') }}">Add Project</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="content">
+                <section class="section">
+                    <h2>Add New Project</h2>
+                    <p style="text-align: center; font-size: 1.2rem; color: #666; margin-bottom: 3rem;">
+                        Add a new project to showcase your work and achievements.
+                    </p>
+
+                    <!-- Flash messages -->
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}" style="padding: 1rem; margin-bottom: 2rem; border-radius: 8px; background: {% if category == 'success' %}#d4edda{% else %}#f8d7da{% endif %}; color: {% if category == 'success' %}#155724{% else %}#721c24{% endif %}; border: 1px solid {% if category == 'success' %}#c3e6cb{% else %}#f5c6cb{% endif %};">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+                    <!-- Add Project Form -->
+                    <div style="background: white; border-radius: 15px; padding: 3rem; box-shadow: 0 5px 20px rgba(0,0,0,0.1); max-width: 800px; margin: 0 auto;">
+                        <form action="{{ url_for('submit_project') }}" method="POST" style="display: flex; flex-direction: column; gap: 2rem;">
+                            
+                            <!-- Project Title -->
+                            <div>
+                                <label for="title" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #5a4fcf;">
+                                    <i class="fas fa-heading" style="margin-right: 0.5rem;"></i>
+                                    Project Title *
+                                </label>
+                                <input type="text" 
+                                       id="title" 
+                                       name="title" 
+                                       required 
+                                       style="width: 100%; padding: 1rem; border: 2px solid #e1e5e9; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;"
+                                       placeholder="Enter your project title..."
+                                       onfocus="this.style.borderColor='#5a4fcf'"
+                                       onblur="this.style.borderColor='#e1e5e9'">
+                            </div>
+
+                            <!-- Project Description -->
+                            <div>
+                                <label for="description" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #5a4fcf;">
+                                    <i class="fas fa-align-left" style="margin-right: 0.5rem;"></i>
+                                    Project Description *
+                                </label>
+                                <textarea id="description" 
+                                          name="description" 
+                                          required 
+                                          rows="6"
+                                          style="width: 100%; padding: 1rem; border: 2px solid #e1e5e9; border-radius: 8px; font-size: 1rem; font-family: inherit; resize: vertical; transition: border-color 0.3s ease;"
+                                          placeholder="Describe your project, including technologies used, key achievements, and any notable outcomes..."
+                                          onfocus="this.style.borderColor='#5a4fcf'"
+                                          onblur="this.style.borderColor='#e1e5e9'"></textarea>
+                            </div>
+
+                            <!-- Image Filename -->
+                            <div>
+                                <label for="image_filename" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #5a4fcf;">
+                                    <i class="fas fa-image" style="margin-right: 0.5rem;"></i>
+                                    Image Filename
+                                </label>
+                                <input type="text" 
+                                       id="image_filename" 
+                                       name="image_filename" 
+                                       style="width: 100%; padding: 1rem; border: 2px solid #e1e5e9; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease;"
+                                       placeholder="e.g., project_screenshot.jpg (optional)"
+                                       onfocus="this.style.borderColor='#5a4fcf'"
+                                       onblur="this.style.borderColor='#e1e5e9'">
+                                <small style="color: #666; margin-top: 0.5rem; display: block;">
+                                    <i class="fas fa-info-circle" style="margin-right: 0.5rem;"></i>
+                                    Enter the filename of an image in your /static/images/ folder. If left blank, a placeholder image will be used.
+                                </small>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem;">
+                                <button type="submit" 
+                                        style="background: linear-gradient(135deg, #5a4fcf, #8b5cf6); color: white; padding: 1rem 2rem; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: transform 0.2s ease; box-shadow: 0 4px 15px rgba(90, 79, 207, 0.3);">
+                                    <i class="fas fa-plus" style="margin-right: 0.5rem;"></i>
+                                    Add Project
+                                </button>
+                                <a href="{{ url_for('projects') }}" 
+                                   style="background: #6c757d; color: white; padding: 1rem 2rem; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 600; text-decoration: none; transition: transform 0.2s ease; box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);">
+                                    <i class="fas fa-arrow-left" style="margin-right: 0.5rem;"></i>
+                                    Back to Projects
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Instructions -->
+                    <div style="background: #f8f9fa; border-radius: 15px; padding: 2rem; margin-top: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                        <h3 style="color: #5a4fcf; margin-bottom: 1rem;">
+                            <i class="fas fa-lightbulb" style="margin-right: 0.5rem;"></i>
+                            Instructions
+                        </h3>
+                        <ul style="color: #666; line-height: 1.8; padding-left: 1.5rem;">
+                            <li><strong>Title:</strong> Enter a descriptive title for your project</li>
+                            <li><strong>Description:</strong> Provide detailed information about your project, including technologies used and achievements</li>
+                            <li><strong>Image:</strong> If you have an image for your project, place it in the <code>/static/images/</code> folder and enter the filename here</li>
+                            <li><strong>Note:</strong> Images should be placed in the <code>/static/images/</code> folder manually - drag and drop functionality will be added later</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Bryant Teegardin. All rights reserved.</p>
+            <p style="margin-top: 0.5rem;">
+                <a href="https://github.com/bteegard/AiDD-Assignment-5" target="_blank" style="color: #5a4fcf; text-decoration: none; font-weight: 500;">
+                    <i class="fab fa-github" style="margin-right: 0.5rem;"></i>View on GitHub
+                </a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

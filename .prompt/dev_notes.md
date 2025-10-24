@@ -67,3 +67,88 @@ The key to successful AI-assisted development was maintaining active oversight a
 - **Testing**: I tested all functionality to ensure it worked correctly before finalizing.
 
 The AI served as an excellent coding partner, handling the repetitive and complex parts while I focused on customization, quality assurance, and ensuring the final product met all assignment requirements. This collaborative approach resulted in a professional, fully functional website that showcases both technical competence and responsible AI tool usage.
+
+## Assignment 7: Database Integration and CRUD Operations
+
+### Prompt 4: Database Access Layer Implementation
+**My Prompt:**
+"Add a Data Access Layer file called DAL.py to hold. DAL.py should include the statements - import sqlite and methods needed to interact with the database. Use templates for HTML (minimum - Projects page). Create a database called projects.db and create a single table in the database called projects. This table should have at least 3 columns (Title, Description, and ImageFileName). You may add additional columns as needed."
+
+**AI Output:**
+The AI created a comprehensive DAL.py with:
+- SQLite database connection and management
+- CRUD operations (Create, Read, Update, Delete)
+- Proper error handling and connection management
+- Database initialization with sample data
+- Methods following the provided example structure
+
+**Decision:** Accepted with enhancements. The AI provided excellent database methods following the exact pattern requested. I enhanced it with additional utility methods and better error handling.
+
+### Prompt 5: CRUD Functionality Extension
+**My Prompt:**
+"Can you also add a function to update and delete the projects if the user wants to alter the tables"
+
+**AI Output:**
+The AI extended the functionality with:
+- Update and delete methods in DAL.py
+- New Flask routes for editing and deleting projects
+- Edit project template with pre-filled forms
+- Confirmation dialogs for destructive actions
+- Enhanced projects table with action buttons
+
+**Decision:** Accepted completely. The AI provided a complete CRUD implementation with proper user experience considerations like confirmation dialogs and flash messages.
+
+### Prompt 6: Image Pathing Fix
+**My Prompt:**
+"fix the pathing to my images folder wherever needed"
+
+**AI Output:**
+The AI systematically updated:
+- Flask app to serve images from static/images folder
+- All templates to use correct static file paths
+- Form instructions to reference correct folder structure
+- Documentation to reflect new image locations
+
+**Decision:** Accepted with verification. The AI correctly identified and fixed all image pathing issues across the entire application, ensuring proper Flask static file serving.
+
+### Prompt 7: Content Customization
+**My Prompt:**
+"in my projects page, please remove the part about deloitte"
+
+**AI Output:**
+The AI cleanly removed the Deloitte Career Highlight section while preserving:
+- All other page functionality
+- Proper HTML structure
+- Database table and CRUD operations
+- Static project cards and other sections
+
+**Decision:** Accepted immediately. The AI precisely removed only the requested section without affecting other functionality.
+
+## Learning Outcomes from AI-Assisted Database Development
+
+### Technical Skills Gained
+1. **Database Design**: Learned proper SQLite table structure with primary keys, timestamps, and data types
+2. **CRUD Operations**: Mastered Create, Read, Update, Delete operations with proper error handling
+3. **Flask Integration**: Understood how to integrate databases with Flask applications
+4. **Template Management**: Learned to pass data from database to HTML templates
+5. **Static File Serving**: Gained knowledge of proper Flask static file organization
+
+### AI Collaboration Insights
+1. **Iterative Development**: AI excels at building upon previous work and extending functionality
+2. **Code Consistency**: AI maintains consistent patterns and follows established conventions
+3. **Error Prevention**: AI anticipates common issues (like confirmation dialogs for deletions)
+4. **Documentation**: AI provides comprehensive documentation and comments
+
+### Best Practices Learned
+1. **Always validate AI output**: Review code for security, efficiency, and correctness
+2. **Test thoroughly**: Verify all functionality works as expected
+3. **Maintain consistency**: Ensure AI follows established patterns and conventions
+4. **Document changes**: Keep track of modifications and their rationale
+
+### Areas Where Human Oversight Was Critical
+1. **Security considerations**: Ensuring proper SQL injection protection
+2. **User experience**: Adding confirmation dialogs and flash messages
+3. **File organization**: Correcting static file paths for Flask best practices
+4. **Content customization**: Removing specific sections per requirements
+
+This assignment demonstrated the power of AI-assisted development for complex database operations while highlighting the importance of human oversight for security, user experience, and adherence to specific requirements.

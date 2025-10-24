@@ -69,32 +69,47 @@ A professional personal website showcasing skills, interests, and accomplishment
 ## File Structure
 
 ```
-├── index.html              # Homepage
-├── about.html              # About Me page
-├── resume.html             # Resume page
-├── projects.html           # Projects showcase
-├── contact.html            # Contact form page
-├── thankyou.html           # Thank you page after form submission
-├── app.py                  # Flask server application
-├── requirements.txt        # Python dependencies
-├── README.md              # This file
-├── .prompt/
-│   └── dev_notes.md       # AI development reflection
-├── static/
+├── app.py                          # Flask server application
+├── requirements.txt                # Python dependencies  
+├── README.md                       # This file
+├── TEMPLATE_STRUCTURE.md           # Template system documentation
+├── templates/                      # Jinja2 templates directory
+│   ├── base.html                  # Base template (all pages extend this)
+│   ├── index.html                 # Homepage template
+│   ├── about.html                 # About Me page template
+│   ├── resume.html                # Resume page template
+│   ├── projects.html              # Projects page template
+│   ├── contact.html               # Contact form page template
+│   └── thankyou.html              # Thank you page template
+├── static/                        # Static files directory
 │   └── css/
-│       └── styles.css     # Main stylesheet
-└── images/                # Directory for images
-    └── profile-photo.jpg  # Add your photo here
+│       └── styles.css             # Main stylesheet
+├── images/                        # Images directory
+│   └── headshot.jpg              # Profile photo
+├── .prompt/
+│   └── dev_notes.md              # AI development reflection
+└── [Static HTML files]            # Legacy files (for reference)
 ```
 
 ## Technical Details
 
 - **Frontend**: HTML5, CSS3, JavaScript
-- **Backend**: Python Flask
+- **Backend**: Python Flask with Jinja2 templating
+- **Template System**: Base template with inheritance for all pages
 - **Styling**: Custom CSS with dark purple theme
 - **Responsive**: Mobile-first design approach
 - **Form Validation**: HTML5 and JavaScript validation
 - **Accessibility**: WCAG compliant structure
+
+## Template System
+
+This project uses Flask's Jinja2 template engine with template inheritance:
+
+- **`base.html`**: Master template containing header, footer, and common HTML structure
+- **Child templates**: Each page extends `base.html` and only defines unique content
+- **Benefits**: Easy maintenance, consistent design, DRY principle
+
+See [`TEMPLATE_STRUCTURE.md`](TEMPLATE_STRUCTURE.md) for detailed documentation on the template system.
 
 ## Contact Form Features
 
@@ -125,4 +140,4 @@ This project is created for educational purposes as part of the MSIS program at 
 **Created by:** Bryant Teegardin  
 **Program:** Master of Science in Information Systems  
 **Institution:** Indiana Kelley School of Business  
-**Year:** 2024
+**Year:** 2025

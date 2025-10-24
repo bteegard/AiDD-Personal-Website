@@ -6,6 +6,7 @@ __pycache__/
 .Python
 env/
 venv/
+.venv/
 ENV/
 build/
 develop-eggs/
@@ -38,10 +39,19 @@ Thumbs.db
 instance/
 .webassets-cache
 
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+projects.db
+
 # Environment variables
 .env
 .flaskenv
 
 # Logs
 *.log
+
+# Docker
+data/
 

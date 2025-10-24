@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume - Bryant Teegardin</title>
-    <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
         <nav class="container">
-            <a href="index.html" class="logo">Bryant Teegardin</a>
+            <a href="{{ url_for('index') }}" class="logo">Bryant Teegardin</a>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Me</a></li>
-                <li><a href="resume.html">Resume</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About Me</a></li>
+                <li><a href="{{ url_for('resume') }}">Resume</a></li>
+                <li><a href="{{ url_for('projects') }}">Projects</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -62,6 +62,22 @@
 
                         <div class="resume-section">
                             <h3><i class="fas fa-briefcase" style="margin-right: 0.5rem;"></i>Professional Experience</h3>
+                            <div class="resume-item" style="border-left: 4px solid #86bc25; padding-left: 1.5rem; background: linear-gradient(to right, rgba(134, 188, 37, 0.05), transparent); border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
+                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                    <img src="{{ url_for('static', filename='images/deloitte logo.jpg') }}" alt="Deloitte Logo" style="height: 40px;">
+                                    <div style="flex: 1;">
+                                        <h4 style="margin: 0; color: #000;">Technology Enablement and Transformation Analyst</h4>
+                                        <div class="date" style="margin: 0.25rem 0;">Deloitte Consulting – Starting Post-Graduation 2026</div>
+                                        <div style="color: #5a4fcf; font-weight: 500; font-size: 0.9rem;">
+                                            <i class="fas fa-map-marker-alt" style="margin-right: 0.5rem;"></i>Chicago, IL
+                                        </div>
+                                    </div>
+                                </div>
+                                <p style="font-weight: 600; color: #86bc25; margin-bottom: 0.5rem;">
+                                    <i class="fas fa-star" style="margin-right: 0.5rem;"></i>Full-Time Offer Accepted
+                                </p>
+                                <p>Joining Deloitte Consulting's Technology practice to drive digital transformation and enable business innovation through cutting-edge technology solutions.</p>
+                            </div>
                             <div class="resume-item">
                                 <h4>Technical Specialist – Business Architecture Operations</h4>
                                 <div class="date">Kyndryl – June 2025 – August 2025</div>
@@ -141,7 +157,7 @@
         <div class="container">
             <p>&copy; 2025 Bryant Teegardin. All rights reserved.</p>
             <p style="margin-top: 0.5rem;">
-                <a href="https://github.com/bteegard/Assignment5-Ai-Update" target="_blank" style="color: #5a4fcf; text-decoration: none; font-weight: 500;">
+                <a href="https://github.com/bteegard/AiDD-Assignment-5" target="_blank" style="color: #5a4fcf; text-decoration: none; font-weight: 500;">
                     <i class="fab fa-github" style="margin-right: 0.5rem;"></i>View on GitHub
                 </a>
             </p>

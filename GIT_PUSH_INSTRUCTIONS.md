@@ -16,7 +16,7 @@ git config --global user.email "bteegard@iu.edu"
 
 ### 3. Add Remote Repository
 ```bash
-git remote add origin https://github.com/bteegard/Assignment5-Ai-Update.git
+git remote add origin https://github.com/bteegard/AiDD-Assignment-5.git
 ```
 
 ### 4. Check Current Status
@@ -102,7 +102,7 @@ git push
 
 ---
 
-**Your Repository URL:** https://github.com/bteegard/Assignment5-Ai-Update
+**Your Repository URL:** https://github.com/bteegard/AiDD-Assignment-5
 
 Good luck with your assignment! 🚀
 

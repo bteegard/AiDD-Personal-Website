@@ -99,6 +99,34 @@ main {
     margin-bottom: 3rem;
 }
 
+/* Career Announcement Styles */
+.career-announcement {
+    animation: slideUp 0.8s ease-out;
+    margin-bottom: 3rem;
+}
+
+.announcement-background {
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.announcement-background:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .hero h1 {
     font-size: 3.5rem;
     margin-bottom: 1rem;
@@ -540,6 +568,19 @@ footer {
     /* Reduce zoom effect on mobile for better performance */
     .profile-container.scrolled .profile-image {
         transform: scale(1.05);
+    }
+    
+    /* Career announcement responsive */
+    .career-announcement .announcement-background {
+        background-position: center !important;
+    }
+    
+    .career-announcement h2 {
+        font-size: 1.5rem !important;
+    }
+    
+    .career-announcement p {
+        font-size: 1rem !important;
     }
 }
 

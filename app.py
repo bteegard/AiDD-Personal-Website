@@ -1,48 +1,138 @@
-from flask import Flask, render_template, request, redirect, url_for, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory, flash
 import os
+from DAL import getAllProjects, saveProjectDB, getProjectById, updateProjectById, deleteProjectById
 
-# Set the static folder to the parent directory
-app = Flask(__name__, static_folder='.', static_url_path='')
+# Initialize Flask app with templates and static folders
+app = Flask(__name__, 
+            template_folder='templates',
+            static_folder='static')
+
+# Set secret key for flash messages
+app.secret_key = 'your-secret-key-here'
+
+# Route to serve images from the static/images directory
+@app.route('/images/<path:filename>')
+def serve_image(filename):
+    return send_from_directory('static/images', filename)
+
+# Route to serve resume PDF
+@app.route('/resume.pdf')
+def serve_resume():
+    return send_from_directory('.', 'resume.pdf')
 
 # Route for the homepage
 @app.route('/')
 def index():
-    return send_from_directory('.', 'index.html')
+    return render_template('index.html')
 
 # Route for about page
 @app.route('/about')
 def about():
-    return send_from_directory('.', 'about.html')
+    return render_template('about.html')
 
 # Route for resume page
 @app.route('/resume')
 def resume():
-    return send_from_directory('.', 'resume.html')
+    return render_template('resume.html')
 
 # Route for projects page
 @app.route('/projects')
 def projects():
-    return send_from_directory('.', 'projects.html')
+    # Get all projects from the database
+    projects_list = getAllProjects()
+    return render_template('projects.html', projects=projects_list)
 
 # Route for contact page
 @app.route('/contact')
 def contact():
-    return send_from_directory('.', 'contact.html')
+    return render_template('contact.html')
+
+# Route for add project form page
+@app.route('/add_project')
+def add_project():
+    return render_template('add_project.html')
+
+# Route for handling project form submission
+@app.route('/submit_project', methods=['POST'])
+def submit_project():
+    # Get form data
+    title = request.form.get('title')
+    description = request.form.get('description')
+    image_filename = request.form.get('image_filename')
+    
+    # Basic validation
+    if not title or not description:
+        flash('Title and Description are required fields.', 'error')
+        return redirect(url_for('add_project'))
+    
+    # If no image filename provided, use placeholder
+    if not image_filename:
+        image_filename = "placeholder.png"
+    
+    try:
+        # Save project to database
+        saveProjectDB(title, description, image_filename)
+        flash('Project added successfully!', 'success')
+        return redirect(url_for('projects'))
+    except Exception as e:
+        flash(f'Error adding project: {str(e)}', 'error')
+        return redirect(url_for('add_project'))
+
+# Route for editing a project
+@app.route('/edit_project/<int:project_id>')
+def edit_project(project_id):
+    project = getProjectById(project_id)
+    if not project:
+        flash('Project not found.', 'error')
+        return redirect(url_for('projects'))
+    return render_template('edit_project.html', project=project, project_id=project_id)
+
+# Route for handling project update
+@app.route('/update_project/<int:project_id>', methods=['POST'])
+def update_project(project_id):
+    # Get form data
+    title = request.form.get('title')
+    description = request.form.get('description')
+    image_filename = request.form.get('image_filename')
+    
+    # Basic validation
+    if not title or not description:
+        flash('Title and Description are required fields.', 'error')
+        return redirect(url_for('edit_project', project_id=project_id))
+    
+    # If no image filename provided, use placeholder
+    if not image_filename:
+        image_filename = "placeholder.png"
+    
+    try:
+        # Update project in database
+        success = updateProjectById(project_id, title, description, image_filename)
+        if success:
+            flash('Project updated successfully!', 'success')
+        else:
+            flash('Project not found or no changes made.', 'error')
+        return redirect(url_for('projects'))
+    except Exception as e:
+        flash(f'Error updating project: {str(e)}', 'error')
+        return redirect(url_for('edit_project', project_id=project_id))
+
+# Route for deleting a project
+@app.route('/delete_project/<int:project_id>', methods=['POST'])
+def delete_project(project_id):
+    try:
+        success = deleteProjectById(project_id)
+        if success:
+            flash('Project deleted successfully!', 'success')
+        else:
+            flash('Project not found.', 'error')
+    except Exception as e:
+        flash(f'Error deleting project: {str(e)}', 'error')
+    return redirect(url_for('projects'))
 
 # Route for thank you page
 @app.route('/thankyou')
 def thankyou():
-    return send_from_directory('.', 'thankyou.html')
-
-# Route to serve static files (CSS, JS)
-@app.route('/static/<path:filename>')
-def static_files(filename):
-    return send_from_directory('static', filename)
-
-# Route to serve images
-@app.route('/images/<path:filename>')
-def images(filename):
-    return send_from_directory('images', filename)
+    return render_template('thankyou.html')
 
 # Handle form submission from contact page
 @app.route('/submit_contact', methods=['POST'])
@@ -72,11 +162,11 @@ def submit_contact():
 # Error handlers
 @app.errorhandler(404)
 def not_found(error):
-    return send_from_directory('.', 'index.html'), 404
+    return render_template('index.html'), 404
 
 @app.errorhandler(500)
 def internal_error(error):
-    return send_from_directory('.', 'index.html'), 500
+    return render_template('index.html'), 500
 
 if __name__ == '__main__':
     print("=" * 60)

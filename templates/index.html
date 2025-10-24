@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}Bryant Teegardin - MSIS Student | Incoming Deloitte Technology Analyst{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <h1>Bryant Teegardin</h1>
+        <p class="subtitle">MSIS Student at Indiana Kelley School of Business</p>
+        <p class="subtitle" style="font-size: 1.1rem; margin-top: -1rem; opacity: 0.9;">
+            <i class="fas fa-briefcase" style="margin-right: 0.5rem;"></i>Incoming Technology Enablement and Transformation Analyst at Deloitte
+        </p>
+        <p class="description">
+            Passionate about technology, physical fitness, and continuous learning. 
+            Exploring the intersection of information systems and business innovation.
+        </p>
+    </div>
+</section>
+
+<!-- Career Announcement Banner with Parallax -->
+<div class="container" style="margin-top: -3rem; position: relative; z-index: 10;">
+    <div class="career-announcement" id="chicagoBanner">
+        <div class="announcement-background" id="announcementBg" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6)), url('{{ url_for('static', filename='images/chicago_skyline.jpg') }}'); background-size: cover; background-position: center; border-radius: 20px; overflow: hidden; transition: transform 0.3s ease-out, border-radius 0.3s ease-out;">
+            <div style="padding: 3rem; text-align: center; color: white;" id="bannerContent">
+                <div style="display: inline-block; background: white; padding: 1rem 2rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                    <img src="{{ url_for('static', filename='images/deloitte logo.jpg') }}" alt="Deloitte Logo" style="height: 50px; display: block;">
+                </div>
+                <h2 style="font-size: 2rem; margin-bottom: 1rem; color: white;">Exciting Career News! 🎉</h2>
+                <p style="font-size: 1.3rem; margin-bottom: 0.5rem; font-weight: 600;">Joining Deloitte Consulting</p>
+                <p style="font-size: 1.1rem; opacity: 0.95;">Technology Enablement and Transformation Analyst</p>
+                <p style="font-size: 1rem; opacity: 0.9; margin-top: 1rem;">
+                    <i class="fas fa-map-marker-alt" style="margin-right: 0.5rem;"></i>Chicago, IL
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+        <section class="section">
+            <h2>Welcome to My Portfolio</h2>
+            <p style="font-size: 1.2rem; text-align: center; color: #666; margin-bottom: 2rem;">
+                I'm currently pursuing my Master's in Information Systems at the prestigious Indiana Kelley School of Business. 
+                My journey combines academic excellence with a passion for physical activities and technological innovation.
+            </p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <div style="text-align: center; padding: 2rem; background: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                    <i class="fas fa-graduation-cap" style="font-size: 3rem; color: #5a4fcf; margin-bottom: 1rem;"></i>
+                    <h3>Academic Excellence</h3>
+                    <p>Pursuing MSIS at Indiana Kelley School of Business, one of the top-ranked business schools in the nation.</p>
+                </div>
+                
+                <div style="text-align: center; padding: 2rem; background: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                    <i class="fas fa-dumbbell" style="font-size: 3rem; color: #5a4fcf; margin-bottom: 1rem;"></i>
+                    <h3>Physical Fitness</h3>
+                    <p>Passionate about kayaking, rock climbing, and weight lifting - activities that build both body and character.</p>
+                </div>
+                
+                <div style="text-align: center; padding: 2rem; background: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                    <i class="fas fa-laptop-code" style="font-size: 3rem; color: #5a4fcf; margin-bottom: 1rem;"></i>
+                    <h3>Technology & Innovation</h3>
+                    <p>Exploring cutting-edge information systems and their applications in modern business environments.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Quick Links</h2>
+            <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 2rem;">
+                <a href="{{ url_for('about') }}" style="background: linear-gradient(135deg, #5a4fcf, #8b5cf6); color: white; padding: 1rem 2rem; border-radius: 25px; text-decoration: none; font-weight: 500; transition: all 0.3s ease;">
+                    Learn More About Me
+                </a>
+                <a href="{{ url_for('projects') }}" style="background: linear-gradient(135deg, #5a4fcf, #8b5cf6); color: white; padding: 1rem 2rem; border-radius: 25px; text-decoration: none; font-weight: 500; transition: all 0.3s ease;">
+                    View My Projects
+                </a>
+                <a href="{{ url_for('contact') }}" style="background: linear-gradient(135deg, #5a4fcf, #8b5cf6); color: white; padding: 1rem 2rem; border-radius: 25px; text-decoration: none; font-weight: 500; transition: all 0.3s ease;">
+                    Get In Touch
+                </a>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Chicago banner expansion effect on scroll - bidirectional
+    window.addEventListener('scroll', function() {
+        const banner = document.getElementById('chicagoBanner');
+        const bannerBg = document.getElementById('announcementBg');
+        const bannerContent = document.getElementById('bannerContent');
+        
+        if (!banner || !bannerBg) return;
+        
+        const scrollPosition = window.pageYOffset;
+        const bannerRect = banner.getBoundingClientRect();
+        const bannerTop = bannerRect.top;
+        const windowHeight = window.innerHeight;
+        
+        // Calculate how far into view the banner is (0 = top of viewport, 1 = bottom of viewport)
+        const viewportProgress = (windowHeight - bannerTop) / windowHeight;
+        
+        // Create smooth scroll progress (0 when banner just enters, 1 when fully scrolled through)
+        const scrollProgress = Math.max(0, Math.min(1, viewportProgress - 0.2));
+        
+        // Expand banner as you scroll down, retract as you scroll up
+        const scaleX = 1 + (scrollProgress * 0.2); // Expand up to 20% wider
+        const scaleY = 1 + (scrollProgress * 0.15); // Expand up to 15% taller
+        
+        // Apply smooth transform
+        bannerBg.style.transform = `scaleX(${scaleX}) scaleY(${scaleY})`;
+        
+        // Reduce border radius as it expands (sharper corners when bigger)
+        const borderRadius = 20 - (scrollProgress * 15); // From 20px to 5px
+        bannerBg.style.borderRadius = `${borderRadius}px`;
+        
+        // Zoom background image for parallax effect
+        const bgScale = 100 + (scrollProgress * 15); // From 100% to 115%
+        bannerBg.style.backgroundSize = `${bgScale}%`;
+        
+        // Subtle content fade for dramatic effect
+        if (bannerContent) {
+            bannerContent.style.opacity = 1 - (scrollProgress * 0.15);
+        }
+    });
+</script>
+{% endblock %}
