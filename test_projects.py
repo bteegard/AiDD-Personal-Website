@@ -10,13 +10,9 @@ class TestFlaskApp:
     
     def setup_method(self):
         """Set up test client before each test"""
-        try:
-            # Initialize database if it doesn't exist
-            from DAL import createDatabase
-            createDatabase()
-        except Exception:
-            # If database initialization fails, continue with tests
-            pass
+        # Initialize database if it doesn't exist
+        from DAL import createDatabase
+        createDatabase()
         
         self.client = app.test_client()
         self.app = app

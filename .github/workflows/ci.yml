@@ -30,7 +30,21 @@ jobs:
     
     - name: Initialize database
       run: |
-        python -c "from DAL import createDatabase; createDatabase()"
+        python -c "
+        import sqlite3
+        from DAL import createDatabase
+        createDatabase()
+        conn = sqlite3.connect('projects.db')
+        cursor = conn.cursor()
+        cursor.execute('SELECT name FROM sqlite_master WHERE type=\"table\" AND name=\"projects\"')
+        result = cursor.fetchone()
+        if result:
+            print('✅ Database table created successfully')
+        else:
+            print('❌ Database table creation failed')
+            exit(1)
+        conn.close()
+        "
     
     - name: Run tests
       run: |
