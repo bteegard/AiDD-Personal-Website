@@ -28,6 +28,10 @@ jobs:
         pip install -r requirements.txt
         pip install pytest pytest-cov
     
+    - name: Initialize database
+      run: |
+        python -c "from DAL import createDatabase; createDatabase()"
+    
     - name: Run tests
       run: |
         pytest test_database.py test_projects.py -v --cov=. --cov-report=xml
